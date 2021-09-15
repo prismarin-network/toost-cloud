@@ -28,6 +28,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: install
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: |
           cd web-app/
           npm install
@@ -67,6 +68,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: install
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: |
           cd web-app/
           npm install
