@@ -6,9 +6,11 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "chromatic --exit-zero-on-changes"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.1",
     "next": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
@@ -21,6 +23,7 @@
     "@storybook/react": "^6.3.8",
     "autoprefixer": "^10.2.6",
     "babel-loader": "^8.2.2",
+    "chromatic": "^5.9.2",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
     "postcss": "^8.3.5",
