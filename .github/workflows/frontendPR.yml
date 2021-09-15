@@ -1,4 +1,4 @@
-name: CI
+name: frontend
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   Web-App:
-    name: frontend/web-app
+    name: web-app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -27,7 +27,7 @@ jobs:
           cd web-app/
           npm run build-storybook
   Ionic-App:
-    name: frontend/ionic-app
+    name: ionic-app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
