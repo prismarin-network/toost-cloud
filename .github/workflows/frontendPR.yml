@@ -33,10 +33,12 @@ jobs:
           cd web-app/
           npm run build
           
-      - name: build-storybook
-        run: |
-          cd web-app/
-          npm run build-storybook
+      - name: publish storybook
+        uses: chromaui/action@v1
+        with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+            workingDir: 'web-app/'
           
   Ionic-App:
     name: ionic-app
