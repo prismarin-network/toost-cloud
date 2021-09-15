@@ -1,6 +1,6 @@
 // Import your Component
 import React from 'react';
-import {ExampleComponent} from "../../components/ExampleComponent";
+import { ExampleComponent } from "./ExampleComponent";
 
 // Export a default function
 // This is where you define your components and what props are needed
