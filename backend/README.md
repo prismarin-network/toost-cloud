@@ -2,7 +2,13 @@
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-_If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+If you want to learn more about Quarkus, please visit its website: https://quarkus.io/
+
+## Content
+- File upload / download
+- JWT Authentication
+- Sync. between devices
+- RESTful API
 
 ## Running the application in dev mode
 
@@ -50,5 +56,3 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 You can then execute your native executable with: `./target/cloud-backend-1.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.html
-.
-
