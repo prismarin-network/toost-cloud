@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint:recommended", "next"],
+  "extends": ["next"],
   "rules": {
     "@next/next/no-img-element": "off"
   }
