@@ -5,8 +5,8 @@ on:
     branches: [ master ]
 
 jobs:
-  Deploy:
-    name: web-app
+  Web-App:
+    name: frontend/web-app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -26,3 +26,20 @@ jobs:
         run: |
           cd web-app/
           npm run build-storybook
+  Ionic-App:
+    name: frontend/ionic-app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        run: |
+          cd ionic-app/
+          npm ci
+      - name: lint
+        run: |
+          cd ionic-app/
+          npm run lint
+      - name: build
+        run: |
+          cd ionic-app/
+          npm run build
