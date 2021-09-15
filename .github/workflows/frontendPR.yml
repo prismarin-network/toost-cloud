@@ -3,43 +3,62 @@ name: frontend
 on:
   pull_request:
     branches: [ master ]
+    
+  workflow_dispatch:
 
 jobs:
   Web-App:
     name: web-app
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v2
+
+      - uses: c-hive/gha-npm-cache@v1
+        with:
+          directory: web-app
+
       - name: install
         run: |
           cd web-app/
-          npm ci
+          npm install
+
       - name: lint
         run: |
           cd web-app/
           npm run lint
+          
       - name: build
         run: |
           cd web-app/
           npm run build
+          
       - name: build-storybook
         run: |
           cd web-app/
           npm run build-storybook
+          
   Ionic-App:
     name: ionic-app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - uses: c-hive/gha-npm-cache@v1
+        with:
+          directory: web-app
+
       - name: install
         run: |
-          cd ionic-app/
-          npm ci
+          cd web-app/
+          npm install
+
       - name: lint
         run: |
           cd ionic-app/
           npm run lint
+          
       - name: build
         run: |
           cd ionic-app/
-          npm run build
+          npm run build       
