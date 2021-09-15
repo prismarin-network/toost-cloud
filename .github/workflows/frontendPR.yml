@@ -46,11 +46,11 @@ jobs:
 
       - uses: c-hive/gha-npm-cache@v1
         with:
-          directory: web-app
+          directory: ionic-app
 
       - name: install
         run: |
-          cd web-app/
+          cd ionic-app/
           npm install
 
       - name: lint
