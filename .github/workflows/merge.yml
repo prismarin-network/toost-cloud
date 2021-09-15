@@ -26,6 +26,7 @@ jobs:
         with:
             token: ${{ secrets.GITHUB_TOKEN }}
             projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+            workingDir: 'web-app/'
 
   Ionic-App:
     name: ionic-app
