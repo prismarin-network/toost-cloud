@@ -1,6 +1,5 @@
 package net.toost.cloud.backend.domain.user.application;
 
-import lombok.SneakyThrows;
 import net.toost.cloud.backend.domain.user.application.request.AuthLoginRequest;
 import net.toost.cloud.backend.domain.user.application.response.AuthLoginResponse;
 import net.toost.cloud.backend.domain.user.core.exception.AuthLoginFailedException;
@@ -15,8 +14,6 @@ import javax.inject.Inject;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.Optional;
 
 /**

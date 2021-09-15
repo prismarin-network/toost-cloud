@@ -87,11 +87,12 @@ public class TokenUtils {
 	 * @return
 	 */
 	public static String removeBeginEnd(String pem) {
-		pem = pem.replaceAll("-----BEGIN (.*)-----", "");
-		pem = pem.replaceAll("-----END (.*)----", "");
-		pem = pem.replaceAll("\r\n", "");
-		pem = pem.replaceAll("\n", "");
-		return pem.trim();
+		String output = pem;
+		output = output.replaceAll("-----BEGIN (.*)-----", "");
+		output = output.replaceAll("-----END (.*)----", "");
+		output = output.replaceAll("\r\n", "");
+		output = output.replaceAll("\n", "");
+		return output.trim();
 	}
 
 	public static int currentTimeInSecs() {

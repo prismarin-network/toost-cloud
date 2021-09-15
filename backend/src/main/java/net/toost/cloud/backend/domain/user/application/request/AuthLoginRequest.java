@@ -2,7 +2,6 @@ package net.toost.cloud.backend.domain.user.application.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**

@@ -2,10 +2,7 @@ package net.toost.cloud.backend;
 
 import io.quarkus.test.common.http.TestHTTPEndpoint;
 import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
-import net.toost.cloud.backend.domain.user.application.AuthResource;
 import net.toost.cloud.backend.domain.user.application.UserResource;
-import net.toost.cloud.backend.domain.user.application.request.AuthLoginRequest;
 import net.toost.cloud.backend.domain.user.core.model.User;
 import net.toost.cloud.backend.domain.user.core.ports.outgoing.UserRepository;
 import net.toost.cloud.backend.util.TokenUtils;

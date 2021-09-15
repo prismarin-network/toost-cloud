@@ -8,7 +8,6 @@ import net.toost.cloud.backend.domain.user.application.request.AuthLoginRequest;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
 
 /**
  * Copyright (c) Maga, All Rights Reserved
