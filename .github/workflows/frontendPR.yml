@@ -8,12 +8,22 @@ jobs:
   Web-App:
     name: web-app
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v2
+
+      - name: check cache
+        id: cache-web
+        uses: actions/cache@v2
+        with:
+          path: cache-web
+          key: ${{ runner.os }}-cache-web
+
       - name: install
+        if: steps.cache-web.outputs.cache-hit != 'true'
         run: |
-          cd web-app/
-          npm ci
+            cd web-app/
+            npm ci
       - name: lint
         run: |
           cd web-app/
@@ -26,15 +36,25 @@ jobs:
         run: |
           cd web-app/
           npm run build-storybook
+          
   Ionic-App:
     name: ionic-app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: check cache
+        id: cache-ionic
+        uses: actions/cache@v2
+        with:
+          path: cache-ionic
+          key: ${{ runner.os }}-cache-ionic
+
       - name: install
+        if: steps.cache-ionic.outputs.cache-hit != 'true'
         run: |
-          cd ionic-app/
-          npm ci
+            cd ionic-app/
+            npm ci
       - name: lint
         run: |
           cd ionic-app/
@@ -42,4 +62,4 @@ jobs:
       - name: build
         run: |
           cd ionic-app/
-          npm run build
+          npm run build       
