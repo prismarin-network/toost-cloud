@@ -1,0 +1,45 @@
+name: frontend
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  Web-App:
+    name: web-app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        run: |
+          cd web-app/
+          npm ci
+      - name: lint
+        run: |
+          cd web-app/
+          npm run lint
+      - name: build
+        run: |
+          cd web-app/
+          npm run build
+      - name: build-storybook
+        run: |
+          cd web-app/
+          npm run build-storybook
+  Ionic-App:
+    name: ionic-app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        run: |
+          cd ionic-app/
+          npm ci
+      - name: lint
+        run: |
+          cd ionic-app/
+          npm run lint
+      - name: build
+        run: |
+          cd ionic-app/
+          npm run build
