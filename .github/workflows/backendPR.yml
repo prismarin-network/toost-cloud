@@ -25,5 +25,6 @@ jobs:
       - name: maven test
         run: |
           cd backend/
+          chmod 777 mvnw
           ./mvnw test
           
