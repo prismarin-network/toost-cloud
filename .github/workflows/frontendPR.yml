@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  Deploy:
+    name: web-app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        run: |
+          cd web-app/
+          npm ci
+      - name: lint
+        run: |
+          cd web-app/
+          npm run lint
+      - name: build
+        run: |
+          cd web-app/
+          npm run build
+      - name: build-storybook
+        run: |
+          cd web-app/
+          npm run build-storybook
