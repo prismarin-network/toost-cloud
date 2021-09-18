@@ -1,4 +1,5 @@
 import 'tailwindcss/tailwind.css'
+import { themes } from '@storybook/theming';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -14,4 +15,7 @@ export const parameters = {
       order: ['Guides', ['Introduction']],
     },
   },
+  darkMode: {
+    current: 'dark'
+  }
 }
