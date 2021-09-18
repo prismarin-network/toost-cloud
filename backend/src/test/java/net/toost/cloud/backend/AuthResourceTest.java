@@ -22,7 +22,7 @@ public class AuthResourceTest {
     @Test
     public void testLoginEndpoint() {
         given().contentType(ContentType.JSON)
-                .body(new AuthLoginRequest("admin", "admin123"))
+                .body(new AuthLoginRequest("admin", "admin123", 1000))
                 .when().post("login")
                 .then()
                 .statusCode(200);
