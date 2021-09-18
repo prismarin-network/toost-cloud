@@ -14,4 +14,7 @@ export const parameters = {
       order: ['Guides', ['Introduction']],
     },
   },
+  darkMode: {
+    current: 'dark'
+  }
 }
