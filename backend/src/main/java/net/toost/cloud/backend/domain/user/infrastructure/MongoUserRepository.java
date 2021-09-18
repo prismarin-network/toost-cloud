@@ -40,11 +40,10 @@ public class MongoUserRepository implements UserRepository {
             storedGroups.add(group);
         }
         user.setGroups(storedGroups);
-        persist(user);
         return user;
     }
 
     void onStart(@Observes StartupEvent event) throws Exception {
-        create(defaultUserName, defaultUserPassword, "Admin", "User");
+        persist(create(defaultUserName, defaultUserPassword, "Admin", "User"));
     }
 }

@@ -2,6 +2,7 @@ package net.toost.cloud.backend;
 
 import io.quarkus.test.common.http.TestHTTPEndpoint;
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 import net.toost.cloud.backend.domain.user.application.UserResource;
 import net.toost.cloud.backend.domain.user.core.model.User;
 import net.toost.cloud.backend.domain.user.core.ports.incoming.TokenGenerator;
@@ -34,6 +35,7 @@ public class UserResourceTest {
     @Inject
     UserRepository repository;
 
+
     @BeforeEach
     public void setup() {
         User user = repository.findById("admin");
@@ -51,6 +53,46 @@ public class UserResourceTest {
                 .then()
                 .statusCode(200)
                 .body("displayName", is("Admin"));
+    }
+
+    @Test
+    public void testPutEndpoint() throws Exception {
+        User user = repository.create("Test", "Test123", "User");
+        given().header("Authorization", "Bearer " + jwtToken)
+                .contentType(ContentType.JSON)
+                .body(user)
+                .when().put()
+                .then()
+                .statusCode(200)
+                .body("displayName", is("Test"));
+    }
+
+    @Test
+    public void testDeleteEndpoint() throws Exception {
+        User user = repository.create("Test", "Test123", "User");
+        repository.persist(user);
+
+        given().header("Authorization", "Bearer " + jwtToken)
+                .when().delete("test")
+                .then()
+                .statusCode(200);
+    }
+
+    @Test
+    public void testPatchEndpoint() throws Exception {
+        User user = repository.create("PatchUser", "Test123", "User");
+        repository.persist(user);
+
+        User patchUser = new User();
+        patchUser.setDisplayName("Markus");
+
+        given().header("Authorization", "Bearer " + jwtToken)
+                .contentType(ContentType.JSON)
+                .body(patchUser)
+                .when().patch("PatchUser")
+                .then()
+                .statusCode(200)
+                .body("displayName", is("Markus"));
     }
 
 }

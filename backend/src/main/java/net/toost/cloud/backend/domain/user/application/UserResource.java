@@ -6,9 +6,7 @@ import net.toost.cloud.backend.domain.user.core.ports.outgoing.UserRepository;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
 
@@ -28,12 +26,53 @@ public class UserResource {
     @Path("{id}")
     @GET
     @RolesAllowed("User")
-    public Response get(@PathParam("id") String id) throws UserNotFoundException {
+    public User get(@PathParam("id") String id) throws UserNotFoundException {
         Optional<User> userOptional = repository.findByIdOptional(id.toLowerCase());
         if(!userOptional.isPresent()) {
             throw new UserNotFoundException();
         }
-        return Response.ok(userOptional.get()).build();
+        return userOptional.get();
+    }
+
+    @PUT
+    @RolesAllowed("Admin")
+    public User put(User user) {
+        repository.persistOrUpdate(user);
+        return user;
+    }
+
+    @Path("{id}")
+    @DELETE
+    @RolesAllowed("User")
+    public Response delete(@PathParam("id") String id) throws UserNotFoundException {
+        if (!repository.deleteById(id)) {
+            throw new UserNotFoundException();
+        }
+        return Response.ok().build();
+    }
+
+    @Path("{id}")
+    @PATCH
+    @RolesAllowed("User")
+    public User patch(@PathParam("id") String id, User patchedUser) throws UserNotFoundException {
+        Optional<User> userOptional = repository.findByIdOptional(id.toLowerCase());
+        if(!userOptional.isPresent()) {
+            throw new UserNotFoundException();
+        }
+        User user = userOptional.get();
+        if(patchedUser.getDisplayName() != null) {
+            user.setDisplayName(patchedUser.getDisplayName());
+        }
+        if(patchedUser.getGroups() != null) {
+            for(String group : patchedUser.getGroups()) {
+                user.getGroups().add(group);
+            }
+        }
+        if(patchedUser.getMail() != null) {
+            user.setMail(patchedUser.getMail());
+        }
+        repository.update(user);
+        return user;
     }
 
 }
