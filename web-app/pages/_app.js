@@ -2,7 +2,7 @@ import 'tailwindcss/tailwind.css'
 
 function App({ Component, pageProps }) {
   return (
-      <div className="">
+      <div className="dark">
           <Component {...pageProps} />
       </div>
   )
