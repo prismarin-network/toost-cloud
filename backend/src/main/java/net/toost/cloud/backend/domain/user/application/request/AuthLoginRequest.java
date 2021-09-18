@@ -17,5 +17,6 @@ public class AuthLoginRequest {
 
     private String userName;
     private String password;
+    private long tokenDuration;
 
 }

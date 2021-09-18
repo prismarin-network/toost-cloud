@@ -5,6 +5,7 @@ import net.toost.cloud.backend.domain.user.application.response.AuthLoginRespons
 import net.toost.cloud.backend.domain.user.core.exception.AuthLoginFailedException;
 import net.toost.cloud.backend.domain.user.core.model.User;
 import net.toost.cloud.backend.domain.user.core.ports.incoming.PasswordEncoder;
+import net.toost.cloud.backend.domain.user.core.ports.incoming.TokenGenerator;
 import net.toost.cloud.backend.domain.user.core.ports.outgoing.UserRepository;
 import net.toost.cloud.backend.util.TokenUtils;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -32,14 +33,9 @@ public class AuthResource {
     @Inject
     PasswordEncoder encoder;
 
-    @ConfigProperty(name = "toost.jwt.duration")
-    long tokenDuration;
+    @Inject
+    TokenGenerator generator;
 
-    @ConfigProperty(name = "mp.jwt.verify.issuer")
-    String issuer;
-
-    @ConfigProperty(name = "toost.jwt.generation.keys.directory")
-    String keysDirectory;
 
     @PermitAll
     @Path("login")
@@ -59,7 +55,7 @@ public class AuthResource {
             }
             String token = "";
             try {
-                token = TokenUtils.generateToken(request.getUserName().toLowerCase(), user.getGroups(), tokenDuration, issuer, keysDirectory + "privatekey.pem");
+                token = generator.generateToken(user, request.getTokenDuration());
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new AuthLoginFailedException("There was a problem with creating a jwt token", Response.Status.CONFLICT);

@@ -4,6 +4,7 @@ import io.quarkus.test.common.http.TestHTTPEndpoint;
 import io.quarkus.test.junit.QuarkusTest;
 import net.toost.cloud.backend.domain.user.application.UserResource;
 import net.toost.cloud.backend.domain.user.core.model.User;
+import net.toost.cloud.backend.domain.user.core.ports.incoming.TokenGenerator;
 import net.toost.cloud.backend.domain.user.core.ports.outgoing.UserRepository;
 import net.toost.cloud.backend.util.TokenUtils;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -25,9 +26,8 @@ import static org.hamcrest.Matchers.is;
 @TestHTTPEndpoint(UserResource.class)
 public class UserResourceTest {
 
-    @ConfigProperty(name = "toost.jwt.duration") long tokenDuration;
-    @ConfigProperty(name = "mp.jwt.verify.issuer") String issuer;
-    @ConfigProperty(name = "toost.jwt.generation.keys.directory") String keysDirectory;
+    @Inject
+    TokenGenerator generator;
 
     String jwtToken;
 
@@ -38,7 +38,7 @@ public class UserResourceTest {
     public void setup() {
         User user = repository.findById("admin");
         try {
-            jwtToken = TokenUtils.generateToken(user.getId(), user.getGroups(), tokenDuration, issuer, keysDirectory + "privatekey.pem");
+            jwtToken = generator.generateToken(user, 1000);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

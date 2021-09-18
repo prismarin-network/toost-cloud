@@ -15,27 +15,20 @@ import java.security.KeyPairGenerator;
  **/
 public class KeyPairUtils {
 
-    private static final int KEY_SIZE = 2048;
 
     /**
-     * Generate public and private key on the given directory location
+     * Generate rsa keys on the given location
      *
-     * @param location = directory
+     * @param publicKeyLocation
+     * @param privateKeyLocation
      * @throws Exception
      */
-    public static void generateKeys(String location) throws Exception {
+    public static void generateKeys(String publicKeyLocation, String privateKeyLocation, int keySize) throws Exception {
         KeyPairGenerator pairGenerator = KeyPairGenerator.getInstance("RSA");
-        pairGenerator.initialize(KEY_SIZE);
-
-        File directory = new File(location);
-        if(directory.exists()) {
-            return;
-        }
-        directory.mkdirs();
-
+        pairGenerator.initialize(keySize);
         KeyPair keyPair = pairGenerator.generateKeyPair();
-        writeIntoFile(location.concat("publickey.pem"), "PUBLIC", keyPair.getPublic().getEncoded());
-        writeIntoFile(location.concat("privatekey.pem"), "PRIVATE", keyPair.getPrivate().getEncoded());
+        writeIntoFile(publicKeyLocation, "PUBLIC", keyPair.getPublic().getEncoded());
+        writeIntoFile(privateKeyLocation, "PRIVATE", keyPair.getPrivate().getEncoded());
 
     }
 
@@ -49,6 +42,12 @@ public class KeyPairUtils {
      * @throws IOException
      */
     private static void writeIntoFile(String location, String key, byte[] content) throws IOException {
+        File file = new File(location);
+        if(file.exists()) {
+           return;
+        }
+        file.getParentFile().mkdirs();
+
         @Cleanup Writer out = new FileWriter(location);
         out.write("-----BEGIN RSA "+key+" KEY-----\n");
         out.write(Base64.encodeBase64String(content));
