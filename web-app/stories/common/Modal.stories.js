@@ -11,7 +11,7 @@ export default {
     }
 };
 
-const Template = (args) => <Modal {...args} />;
+const Template = (args) => <div className="h-screen w-full bg-gray-300"> <p className="text-2xl font-bold text-center">Test Text</p> <Modal {...args}> Test Test </Modal></div>;
 
 export const Default = Template.bind({});
 Default.args = {
