@@ -1,21 +1,20 @@
 import React from 'react'
-import {Button} from "@/components/common/Button";
+import {BaseButton} from "@/components/common/BaseButton";
 
 export default {
     title: 'Common/Button',
-    component: Button,
+    component: BaseButton,
     argTypes: {
         disabled: false,
         click: { actions: "clicked" },
     }
 }
 
-const Template = (args) => <Button {...args}>Button</Button>;
+const Template = (args) => <BaseButton {...args}>Button</BaseButton>;
 
 export const Default = Template.bind({});
 Default.args = {
     disabled: false,
-    classes: 'bg-red-300'
 };
 
 export const Disabled = Template.bind({});
