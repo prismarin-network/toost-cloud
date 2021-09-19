@@ -1,13 +1,12 @@
 import React from 'react';
-import  { Modal } from "../../components/common/Modal";
+import {Modal} from "@/components/common/Modal";
 
 export default {
     title: 'Common/Modal',
     component: Modal,
     argTypes: {
         isOpen: true,
-        closeModal: { actions: "closeModal" },
-        openModal: { actions: "openModal" },
+        toggleModal: { actions: "toggleModal" },
     }
 };
 

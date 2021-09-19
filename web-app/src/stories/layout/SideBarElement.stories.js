@@ -1,6 +1,6 @@
 import React from 'react';
-import {SideBarElement} from "../../components/layout/SideBarElement";
 import { RiHome3Line } from "react-icons/ri"
+import {SideBarElement} from "@/components/layout/SideBarElement";
 
 export default {
     title: 'Layout/SideBarElement',

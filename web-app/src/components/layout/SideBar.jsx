@@ -1,5 +1,5 @@
 import { RiImage2Line, RiHome3Line, RiSettings2Line, RiFolder3Line } from "react-icons/ri"
-import {SideBarElement} from "./SideBarElement";
+import {SideBarElement} from "@/components/layout/SideBarElement";
 
 export const SideBar = () => {
     return (

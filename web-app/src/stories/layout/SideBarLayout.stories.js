@@ -1,5 +1,5 @@
 import React from 'react';
-import SidebarLayout from "../../layout/SideBarLayout";
+import SidebarLayout from "@/layout/SideBarLayout";
 
 export default {
     title: 'Layout/SideBarLayout',

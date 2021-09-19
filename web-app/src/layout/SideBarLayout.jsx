@@ -1,6 +1,6 @@
-import {SideBar} from "../components/layout/SideBar";
-import {Header} from "../components/layout/Header";
-import {Toolbar} from "../components/layout/Toolbar";
+import {SideBar} from "@/components/layout/SideBar";
+import {Header} from "@/components/layout/Header";
+import {Toolbar} from "@/components/layout/Toolbar";
 
 export default function SidebarLayout({ children }) {
     return (

@@ -1,4 +1,4 @@
-import SidebarLayout from "../layout/SideBarLayout";
+import SidebarLayout from "@/layout/SideBarLayout";
 
 export default function Home() {
   return (
