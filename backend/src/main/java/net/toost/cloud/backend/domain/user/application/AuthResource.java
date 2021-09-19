@@ -1,14 +1,13 @@
 package net.toost.cloud.backend.domain.user.application;
 
 import net.toost.cloud.backend.domain.user.application.request.AuthLoginRequest;
+import net.toost.cloud.backend.domain.user.application.request.AuthLoginTokenRequest;
 import net.toost.cloud.backend.domain.user.application.response.AuthLoginResponse;
 import net.toost.cloud.backend.domain.user.core.exception.AuthLoginFailedException;
 import net.toost.cloud.backend.domain.user.core.model.User;
 import net.toost.cloud.backend.domain.user.core.ports.incoming.PasswordEncoder;
 import net.toost.cloud.backend.domain.user.core.ports.incoming.TokenGenerator;
 import net.toost.cloud.backend.domain.user.core.ports.outgoing.UserRepository;
-import net.toost.cloud.backend.util.TokenUtils;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
@@ -33,14 +32,11 @@ public class AuthResource {
     @Inject
     PasswordEncoder encoder;
 
-    @Inject
-    TokenGenerator generator;
-
 
     @PermitAll
-    @Path("login")
+    @Path("login/basic")
     @POST
-    public Response login(AuthLoginRequest request) throws AuthLoginFailedException {
+    public Response basic(AuthLoginRequest request) throws AuthLoginFailedException {
         Optional<User> userOptional = repository.findByIdOptional(request.getUserName().toLowerCase());
         if(userOptional.isPresent()) {
             User user = userOptional.get();
@@ -53,16 +49,22 @@ public class AuthResource {
             if(!encoded.equals(user.getPassword())) {
                 throw new AuthLoginFailedException("Password wrong", Response.Status.UNAUTHORIZED);
             }
-            String token = "";
-            try {
-                token = generator.generateToken(user, request.getTokenDuration());
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new AuthLoginFailedException("There was a problem with creating a jwt token", Response.Status.CONFLICT);
-            }
-            return Response.ok(new AuthLoginResponse(token)).build();
+            return Response.ok(new AuthLoginResponse(user.getToken(), user)).build();
         }
         throw new AuthLoginFailedException("User not found", Response.Status.BAD_REQUEST);
     }
+
+    @PermitAll
+    @Path("login/token")
+    @POST
+    public Response token(AuthLoginTokenRequest request) throws AuthLoginFailedException {
+        Optional<User> userOptional = repository.findByToken(request.getToken());
+        if(userOptional.isPresent()) {
+            User user = userOptional.get();
+            return Response.ok(new AuthLoginResponse(user.getToken(), user)).build();
+        }
+        throw new AuthLoginFailedException("User not found", Response.Status.BAD_REQUEST);
+    }
+
 
 }

@@ -3,6 +3,7 @@ package net.toost.cloud.backend.domain.user.application.response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.toost.cloud.backend.domain.user.core.model.User;
 
 /**
  * Copyright (c) Maga, All Rights Reserved
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 public class AuthLoginResponse {
 
     private String token;
+    private User user;
 
 
 }

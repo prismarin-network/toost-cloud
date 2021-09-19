@@ -3,6 +3,8 @@ package net.toost.cloud.backend.domain.user.core.ports.outgoing;
 import io.quarkus.mongodb.panache.PanacheMongoRepositoryBase;
 import net.toost.cloud.backend.domain.user.core.model.User;
 
+import java.util.Optional;
+
 /**
  * Copyright (c) Maga, All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
@@ -22,4 +24,6 @@ public interface UserRepository extends PanacheMongoRepositoryBase<User, String>
      * @throws Exception
      */
     User create(String name, String password, String... groups) throws Exception;
+
+    Optional<User> findByToken(String token);
 }

@@ -6,10 +6,12 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "test": "jest"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.1",
+    "axios": "^0.21.4",
     "faker": "^5.5.3",
     "mobx": "^6.3.3",
     "mobx-react-lite": "^3.2.1",
@@ -17,7 +19,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
-    "storybook-dark-mode": "^1.0.8"
+    "storybook-dark-mode": "^1.0.8",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",

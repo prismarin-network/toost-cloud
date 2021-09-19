@@ -3,13 +3,16 @@ package net.toost.cloud.backend.domain.user.infrastructure;
 import io.quarkus.runtime.StartupEvent;
 import net.toost.cloud.backend.domain.user.core.model.User;
 import net.toost.cloud.backend.domain.user.core.ports.incoming.PasswordEncoder;
+import net.toost.cloud.backend.domain.user.core.ports.incoming.TokenGenerator;
 import net.toost.cloud.backend.domain.user.core.ports.outgoing.UserRepository;
+import net.toost.cloud.backend.util.TokenUtils;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -23,6 +26,9 @@ public class MongoUserRepository implements UserRepository {
 
     @Inject
     PasswordEncoder encoder;
+
+    @Inject
+    TokenGenerator generator;
 
     @ConfigProperty(name = "toost.default.user.name") String defaultUserName;
     @ConfigProperty(name = "toost.default.user.password") String defaultUserPassword;
@@ -40,7 +46,13 @@ public class MongoUserRepository implements UserRepository {
             storedGroups.add(group);
         }
         user.setGroups(storedGroups);
+        user.setToken(generator.generateToken(user, Long.MAX_VALUE));
         return user;
+    }
+
+    @Override
+    public Optional<User> findByToken(String token) {
+        return find("token", token).firstResultOptional();
     }
 
     void onStart(@Observes StartupEvent event) throws Exception {

@@ -13,9 +13,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthLoginRequest {
+public class AuthLoginTokenRequest {
 
-    private String userName;
-    private String password;
+    private String token;
 
 }
