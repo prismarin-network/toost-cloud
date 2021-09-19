@@ -23,6 +23,16 @@ jobs:
           cd web-app/
           npm install
 
+      - name: lint
+        run: |
+          cd web-app/
+          npm run lint
+
+      - name: test
+        run: |
+          cd web-app/
+          npm run test
+
   Ionic-App:
     name: ionic-app
     runs-on: ubuntu-latest
