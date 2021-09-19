@@ -8,6 +8,7 @@ export const FileUploadModal = ({ isOpen }) => {
     const [loading, setLoading] = useState(false)
 
     const {getRootProps, getInputProps} = useDropzone({
+        noKeyboard: true,
         accept: 'image/*',
         onDrop: acceptedFiles => {
             setLoading(true)
@@ -29,11 +30,11 @@ export const FileUploadModal = ({ isOpen }) => {
     }
 
     return (
-        <Modal title="Upload File" isOpen={isOpen} classes="max-w-3xl">
+        <Modal title="Upload File:" isOpen={isOpen} classes="max-w-3xl">
             {loading && (
                 <h1>Test</h1>
             )}
-            <div {...getRootProps({className: 'dropzone'})}>
+            <header {...getRootProps({className: 'dropzone'})}>
                 <div className="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center my-4">
                     <input {...getInputProps()} />
                     <p className="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
@@ -44,8 +45,8 @@ export const FileUploadModal = ({ isOpen }) => {
                         Upload a file
                     </button>
                 </div>
-            </div>
-            <aside>
+            </header>
+            <div>
                 <h4 className="text-md font-semibold">
                     Files:
                 </h4>
@@ -68,7 +69,10 @@ export const FileUploadModal = ({ isOpen }) => {
                         </h1>
                     </div>
                 )}
-            </aside>
+            </div>
+            <footer>
+
+            </footer>
         </Modal>
     )
 }
