@@ -7,7 +7,7 @@ export const BaseButton = ({ classes, type, disabled, onClick, children }) => {
     ];
 
     if (disabled) {
-        classList.push("text-white bg-gray-300 cursor-not-allowed shadow-sm")
+        classList.push("text-white bg-gray-300 cursor-not-allowed shadow-sm focus:ring-0")
     } else if (type === "secondary") {
         classList.push("text-white bg-gray-400 hover:bg-gray-600 focus:ring-gray-300")
     } else if (type === "success") {
@@ -17,11 +17,11 @@ export const BaseButton = ({ classes, type, disabled, onClick, children }) => {
     } else if (type === "primary") {
         classList.push("text-white bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-400")
     } else {
-        classList.push("shadow-none text-white")
+        classList.push("shadow-none text-gray-800 hover:text-gray-500 focus:ring-0")
     }
 
     return (
-        <button onClick={onClick} className={classList.join(" ")}>
+        <button onClick={!disabled ? onClick : () => {}} className={classList.join(" ")}>
             { children }
         </button>
     )

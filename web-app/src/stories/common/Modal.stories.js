@@ -6,8 +6,7 @@ export default {
     component: Modal,
     argTypes: {
         isOpen: true,
-        closeModal: { actions: "closeModal" },
-        openModal: { actions: "openModal" },
+        toggleModal: { actions: "toggleModal" },
     }
 };
 

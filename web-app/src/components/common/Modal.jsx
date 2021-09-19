@@ -1,19 +1,23 @@
 import {Dialog, Transition} from '@headlessui/react'
 import {Fragment} from 'react'
 
-export const Modal = ({isOpen, title, classes, children}) => {
+export const Modal = ({isOpen, title, classes, toggleModal, children}) => {
 
     const styles = [
         classes,
         "inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl"
     ].join(' ')
 
+    const toggle = () => {
+        toggleModal()
+    }
+
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog
                 as="div"
                 className="fixed inset-0 z-10 overflow-y-auto"
-                onClose={() => null}
+                onClose={toggle}
             >
                 <div className="min-h-screen px-4 text-center">
                     <Transition.Child
