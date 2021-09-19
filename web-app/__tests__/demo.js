@@ -1,4 +1,4 @@
-import pageStore from "../stores/page";
+import pageStore from "../src/stores/page";
 
 // Describe what the test does
 describe('Page Store', () => {

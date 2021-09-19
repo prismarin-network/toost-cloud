@@ -1,4 +1,4 @@
-import {Modal} from "../common/Modal";
+import {Modal} from "@/components/common/Modal";
 import {useState} from "react";
 import {useDropzone} from 'react-dropzone';
 import {RiFolderAddLine, RiCloseLine} from 'react-icons/ri'

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SideBar } from "../../components/layout/SideBar";
+import {SideBar} from "@/components/layout/SideBar";
 
 export default {
     title: 'Layout/SideBar',

@@ -1,5 +1,5 @@
 import React from 'react';
-import {FileUploadModal} from "../../components/files/FileUploadModal";
+import {FileUploadModal} from "@/components/files/FileUploadModal";
 
 export default {
     title: 'Files/FileUploadModal',
