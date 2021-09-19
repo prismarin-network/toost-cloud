@@ -30,10 +30,10 @@ jobs:
           cd web-app/
           npm run lint
           
-      - name: build
+      - name: test
         run: |
           cd web-app/
-          npm run build
+          npm run test
           
   Ionic-App:
     name: ionic-app
@@ -54,8 +54,3 @@ jobs:
         run: |
           cd ionic-app/
           npm run lint
-          
-      - name: build
-        run: |
-          cd ionic-app/
-          npm run build       
