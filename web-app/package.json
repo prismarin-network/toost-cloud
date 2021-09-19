@@ -17,15 +17,16 @@
     "next": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-dropzone": "^11.4.0",
     "react-icons": "^4.2.0",
-    "storybook-dark-mode": "^1.0.8"
+    "react-dropzone": "^11.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@storybook/addon-actions": "^6.3.8",
+    "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-essentials": "^6.3.8",
     "@storybook/addon-links": "^6.3.8",
+    "@storybook/addon-postcss": "^2.0.0",
     "@storybook/react": "^6.3.8",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.0",
@@ -38,6 +39,7 @@
     "jest": "^27.2.0",
     "postcss": "^8.3.5",
     "react-test-renderer": "^17.0.2",
+    "storybook-tailwind-dark-mode": "^1.0.11",
     "tailwindcss": "^2.2.4"
   }
 }

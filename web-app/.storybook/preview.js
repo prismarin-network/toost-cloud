@@ -13,8 +13,5 @@ export const parameters = {
       method: 'alphabetical',
       order: ['Guides', ['Introduction']],
     },
-  },
-  darkMode: {
-    current: 'dark'
   }
 }

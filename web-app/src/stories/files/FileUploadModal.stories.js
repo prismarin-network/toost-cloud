@@ -10,7 +10,7 @@ export default {
     }
 };
 
-const Template = (args) =>  <FileUploadModal {...args} />;
+const Template = (args) =>  <div className="h-screen w-full bg-gray-300"><FileUploadModal {...args} /></div>;
 
 export const Default = Template.bind({});
 Default.args = {

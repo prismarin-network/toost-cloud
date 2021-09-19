@@ -23,17 +23,17 @@ export const FileUploadModal = ({ isOpen, toggleModal }) => {
         }
     });
 
-    const removeImage = (fileName) => {
+    const removeImage = (preview) => {
         setFiles(files.filter(file => {
-            if (file.name === fileName) {
+            if (file.preview === preview) {
                 URL.revokeObjectURL(file.preview);
             }
-            return file.name !== fileName
+            return file.preview !== preview
         }))
     }
 
     return (
-        <Modal title="Upload:" toggleModal={() => toggleModal} isOpen={isOpen} classes="max-w-3xl">
+        <Modal title="Upload:" toggleModal={() => toggleModal} isOpen={isOpen} classes="max-w-3xl bg-white dark:bg-gray-900">
             {loading && (
                 <h1>Test</h1>
             )}
@@ -58,7 +58,7 @@ export const FileUploadModal = ({ isOpen, toggleModal }) => {
                             <div className="w-32 h-32 overflow-hidden relative rounded-lg">
                                 <div className="absolute z-20 h-full w-full opacity-0 hover:opacity-100 transition duration-300 ease-in-out">
                                     <div className="bg-blue-400 opacity-70 h-full w-full" />
-                                    <RiCloseLine onClick={() => removeImage(file.name)} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl text-white cursor-pointer" />
+                                    <RiCloseLine onClick={() => removeImage(file.preview)} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl text-white cursor-pointer" />
                                 </div>
                                 {file.type.startsWith("image") ? (
                                     <img className="object-cover w-full h-full" key={file.name} src={file.preview} alt={file.name}/>
@@ -68,7 +68,7 @@ export const FileUploadModal = ({ isOpen, toggleModal }) => {
                                     </div>
                                 )}
                             </div>
-                            <a className="text-gray-500 text-sm font-semibold">
+                            <a className="text-gray-500 text-sm font-semibold truncate">
                                 {file.name}
                             </a>
                         </div>
