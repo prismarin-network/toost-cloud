@@ -1,29 +1,90 @@
-# Next.js + Tailwind CSS Example
+# Toost cloud Web app Project
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+This project uses NextJS, the react framework for production.
+If you want to learn more about NextJS, please visit its website: https://nextjs.org/
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
-
-## Preview
-
-Preview the example live on [StackBlitz](http://stackblitz.com/):
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
-
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+## Setup
 
 ```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+# install dependencies
+$ npm ci
+
+# serve with hot reload
+$ npm run dev
+
+# build for production and launch server
+$ npm run build
+$ npm run start
+
+# for component development
+$ npm run storybook
+$ npm run build-storybook
+
+# to run tests
+$ npm run test
+
+# to check linting
+$ npm run lint
+$ npm run lint -- --fix
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+## Storybook
+
+### What is Storybook
+Storybook is a service we use to develop and design our components.
+It allows us to design the components without a backend. In order to start Storybook execute:
+
+`$ npm run storybook`
+
+### Creating a story
+When creating a new component please create a corresponding story in the `/stories` directory.
+
+Example:
+```bash
+/src/components/common/Button.jsx
+/src/stories/common/Button.stories.js
+```
+
+We want to mirror our components folder in the stories folder. This is to ensure it is easy to follow and navigate both.
+
+You begin each story by importing the component at the top. Afterwards you define a default
+export function defining the component and the arg types for the props. This is to use Storybook controls.
+Afterwards you create a default template that define how the component is used. This default template can then
+be edited for different story version. (See example code below)
+
+```js
+// ExampleComponent.stories.js
+
+// Import your Component
+import React from 'react';
+import { ExampleComponent } from "./ExampleComponent";
+
+// Export a default function
+// This is where you define your components and what props are needed
+// All other argTypes can be found here: https://storybook.js.org/docs/react/essentials/controls#annotation
+export default {
+    title: 'Guides/Example Component',
+    component: ExampleComponent,
+    argTypes: {
+        // Add a color selection
+        color: { control: 'color' },
+        // Add a select dropdown (Can be removed and set in the React Component)
+        size: { control: { type: 'select', options: ['text-sm', 'text-lg', 'text-2xl'] } },
+        // Actions can be used to mock functions. More info: https://storybook.js.org/docs/react/essentials/actions
+        testFunction: { action: "testFunction" }
+    },
+};
+
+// Create a default Template
+const Template = (args) => <ExampleComponent {...args} />;
+
+// For each version of the Component create a new story
+export const Default = Template.bind({});
+// You can change the args and props to modify the story here
+Default.args = {
+    label: 'Test Text',
+    color: 'black'
+};
+```
+
+More helpful links: [Storybook Getting started guide](https://storybook.js.org/docs/react/writing-stories/introduction)
